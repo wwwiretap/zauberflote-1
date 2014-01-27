@@ -27,13 +27,13 @@ describe Zauberflote::Person do
 		before do
 			Zauberflote.configure('https://self1369.highrisehq.com/', '5bfa2ad349f174764a333b5eea8730cb')
 			@person = Zauberflote::Person.new
-			@person.name = "Zauberflote"
+			@person.name = "Last"
 			@save1 = @person.highrise_save
 			Zauberflote.configure('https://nathanthiesen.highrisehq.com/', '9f3e6a2786c7affce261b75c2f256463')
 			@save2 = @person.highrise_save
 
 		end
-		it 'must return a id' do
+		it 'must return an id' do
 			@save1.wont_be nil
 		end
 		it 'must save on different Highrise accounts' do

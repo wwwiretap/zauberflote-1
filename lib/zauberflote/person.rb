@@ -4,7 +4,7 @@ module Zauberflote
 		attr_accessor :name, :last_name, :job_title, :company, :phone, :email, :website
 		
 		def highrise_save
-			person = Highrise::Person.new(
+			@person = Highrise::Person.new(
             :first_name => self.name, 
             :last_name => self.last_name,
             :title => self.job_title,
@@ -25,11 +25,11 @@ module Zauberflote
           }
           )
 			begin
-				person.save
+				@person.save
 			rescue Exception => e
 				puts person.errors
 			end
-			return person.attributes['id']
+			return @person.attributes['id']
 		end
 	end
 end
