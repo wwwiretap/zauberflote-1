@@ -5,7 +5,6 @@ module Zauberflote
     def configure(url, api_token)
       self.url = url
       self.api_token = api_token
-      configure_highrise
     end
 
     def configure_highrise

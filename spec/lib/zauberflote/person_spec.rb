@@ -31,13 +31,18 @@ describe Zauberflote::Person do
       @save1 = @person.highrise_save
       Zauberflote.configure('https://nathanthiesen.highrisehq.com/', '9f3e6a2786c7affce261b75c2f256463')
       @save2 = @person.highrise_save
+      @person_nil = Zauberflote::Person.new
+      @save_nil = @person_nil.highrise_save
 
     end
     it 'must return an id' do
-      @save1.wont_be nil
+      @save1.wont_be_nil
     end
     it 'must save on different Highrise accounts' do
       @save1.wont_equal @save2
+    end
+    it 'must not save empty objects' do
+      @save_nil.must_be_nil
     end
   end
 
