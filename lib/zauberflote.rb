@@ -5,6 +5,6 @@ Dir[File.dirname(__FILE__) + '/zauberflote/*.rb'].each do |file|
 end
 
 module Zauberflote
-	extend Config
+  extend Config
 end
 
