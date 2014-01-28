@@ -3,8 +3,9 @@ module Zauberflote
 
     attr_accessor :name, :last_name, :job_title, :company, :phone, :email, :website, :instance
 
-    def initialize(instance)
-      self.instance = instance
+    def initialize(instance, params=nil)
+        raise ArgumentError,"argument must be an instance of Zauberflote::Instance" unless instance.class == Zauberflote::Instance
+        self.instance = instance
     end
 
     def highrise_save
@@ -29,11 +30,7 @@ module Zauberflote
               ]
           }
           )
-      begin
         @person.save
-      rescue Exception => e
-        puts @person.errors
-      end
       return @person.attributes['id']
     end
   end

@@ -1,49 +1,37 @@
 require_relative '../../spec_helper'
 
-describe Zauberflote::Person do
-  describe 'attributes' do
-    before do
-      @person = Zauberflote::Person.new
-      @person.name = "TestName"
+describe Zauberflote::Person do 
+  describe "initialize(instance)" do 
+    it 'should not instantiate without the instance argument' do
+      lambda { Zauberflote::Person.new }.must_raise ArgumentError
     end
-    it 'should receive the test name' do
-      @person.name.must_equal "TestName"
-    end
-  end
-  describe 'different instances' do
-    before do
-      @person1 = Zauberflote::Person.new
-      @person1.name = "Test1"
-      @person2 = Zauberflote::Person.new
-      @person2.name = "Test2"
-    end
-
-    it 'should have different names' do
-      @person2.name.wont_equal @person1.name
+    it 'should not instantiate if the argument isn\'t an instance of Zauberflote::Instance' do
+      lambda{ Zauberflote::Person.new("foo") }.must_raise ArgumentError
     end
   end
-
-  describe 'save to highrise' do
+  describe "initialize(instance, params)" do
     before do
-      Zauberflote.configure('https://self1369.highrisehq.com/', '5bfa2ad349f174764a333b5eea8730cb')
-      @person = Zauberflote::Person.new
-      @person.name = "Last"
-      @save1 = @person.highrise_save
-      Zauberflote.configure('https://nathanthiesen.highrisehq.com/', '9f3e6a2786c7affce261b75c2f256463')
-      @save2 = @person.highrise_save
-      @person_nil = Zauberflote::Person.new
-      @save_nil = @person_nil.highrise_save
-
+      @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
+      @person = @instance.create_person({:name => "foo", :unknown => "bar"})
     end
-    it 'must return an id' do
-      @save1.wont_be_nil
+    it 'must receive the params argument' do
+      @person.name.must_equal "foo"
     end
-    it 'must save on different Highrise accounts' do
-      @save1.wont_equal @save2
-    end
-    it 'must not save empty objects' do
-      @save_nil.must_be_nil
+    it 'must ignore the unknown key' do
+      lambda {@person.unknown}.must_raise NoMethodError
     end
   end
+  describe 'highrise_save' do
+    before do
+     @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
+     @person = @instance.create_person({:name => "foo"})
+     @person_nil = @instance.create_person
+     @save = @person.highrise_save
+     @save_nil = @person_nil.highrise_save
+    end
+    it 'must configure highrise' do
+      Highrise::Base.site.to_s.must_equal @instance.url
+    end
 
+  end
 end
