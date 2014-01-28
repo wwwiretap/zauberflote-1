@@ -30,12 +30,12 @@ Save the object to your Highrise account
 
 The Zauberflote::Person object support these parameters 
 	
-	{
-	:name => "Nathan",
-	:last_name => "Thiesen",
-	:company => "Nathan's Corp",
-	:title => "CEO",
-	:email => "nathan@nathanscorp.com",
+	params = { 
+		:name => "Nathan",
+		:last_name => "Thiesen",
+		:company => "Nathan's Corp",
+		:title => "CEO",
+		:email => "nathan@nathanscorp.com",
 	} 
 
 ## Contributing
