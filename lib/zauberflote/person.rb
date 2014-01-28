@@ -18,7 +18,6 @@ module Zauberflote
             :first_name => self.name,
             :last_name => self.last_name,
             :title => self.job_title,
-            #:website => self.website,
             :company_id => self.company,
             :contact_data => {
               :email_addresses => [
@@ -26,15 +25,7 @@ module Zauberflote
                     :address => self.email,
                     :location => 'work'
                 }
-              ],
-=begin
-              :phone_numbers => [
-              	:phone_number => {
-              		:number => self.phone,
-                  :location => 'work'
-              	}
               ]
-=end
           }
           )
         @person.save
