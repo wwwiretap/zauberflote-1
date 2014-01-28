@@ -15,9 +15,11 @@ And then execute:
 ## Usage
 
 Create an instance of Zauberflote
+	
 	zauberflote_instance = Zauberflote::Instance.new('https://mysite.highrisehq.com', 'My_API_TOKEN')
 
 Create a Zauberflote::Person object
+	
 	@person = zauberflote_instance.create_person(params)
 
 Save the object to your Highrise account
@@ -27,14 +29,14 @@ Save the object to your Highrise account
 ## Person Params
 
 The Zauberflote::Person object support these parameters 
+	
 	{
 	:name => "Nathan",
 	:last_name => "Thiesen",
 	:company => "Nathan's Corp",
 	:title => "CEO",
 	:email => "nathan@nathanscorp.com",
-
-} 
+	} 
 
 ## Contributing
 
