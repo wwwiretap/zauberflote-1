@@ -1,6 +1,6 @@
 # Zauberflote
 
-This gem enable your application to save contacts in Highrise
+This gem let your application save contacts in Highrise
 
 ## Installation
 
