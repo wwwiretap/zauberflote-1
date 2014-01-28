@@ -11,7 +11,7 @@ describe Zauberflote::Person do
   end
   describe "initialize(instance, params)" do
     before do
-      @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
+      @instance = Zauberflote::Instance.new('https://nathanthiesen.highrisehq.com/', '9f3e6a2786c7affce261b75c2f256463')
       @person = @instance.create_person({:name => "foo", :unknown => "bar"})
     end
     it 'must receive the params argument' do
@@ -23,15 +23,23 @@ describe Zauberflote::Person do
   end
   describe 'highrise_save' do
     before do
-     @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
+     @instance = Zauberflote::Instance.new('https://nathanthiesen.highrisehq.com/', '9f3e6a2786c7affce261b75c2f256463')
      @person = @instance.create_person({:name => "foo"})
      @person_nil = @instance.create_person
      @save = @person.highrise_save
      @save_nil = @person_nil.highrise_save
     end
-    it 'must configure highrise' do
-      Highrise::Base.site.to_s.must_equal @instance.url
+  end
+
+  describe 'saving people in concurrent instances' do
+    before do
+      @instance_a = Zauberflote::Instance.new('https://self1369.highrisehq.com/', '5bfa2ad349f174764a333b5eea8730cb')
+      @instance_b = Zauberflote::Instance.new('https://nathanthiesen.highrisehq.com/', '9f3e6a2786c7affce261b75c2f256463')
+      @person_a = @instance_a.create_person({:name => "InstanceA"})
+      @person_b = @instance_b.create_person({:name => "InstanceB"})
     end
 
+
   end
+
 end
