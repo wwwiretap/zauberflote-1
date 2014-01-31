@@ -23,9 +23,21 @@ module Zauberflote
               :email_addresses => [
                 :email_address => {
                     :address => self.email,
-                    :location => 'work'
+                    :location => 'Work'
                 }
-              ]
+              ],
+            :phone_numbers => [
+              :phone_number => {
+                :location => 'Work',
+                :number => self.phone
+              }
+            ],
+            :web_addresses => [
+              :web_address => {
+                :location => 'Work',
+                :url => self.website
+              }
+            ]
           }
           )
         @person.save

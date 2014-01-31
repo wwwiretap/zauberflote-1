@@ -36,6 +36,8 @@ The Zauberflote::Person object support these parameters
 		:company => "Nathan's Corp",
 		:title => "CEO",
 		:email => "nathan@nathanscorp.com",
+		:website => "www.nathanscorp.com",
+		:phone => '2233445566'
 	} 
 
 ## Contributing
