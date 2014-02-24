@@ -4,4 +4,4 @@ gem 'highrise'
 group :test do
   gem 'rspec-rails', '2.13.1'
 end
-gem 'coveralls', require: false
+gem 'coveralls'
