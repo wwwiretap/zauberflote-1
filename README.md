@@ -1,6 +1,6 @@
 [![Code Climate](https://codeclimate.com/github/thiesen/zauberflote.png)](https://codeclimate.com/github/thiesen/zauberflote)
 [![Build Status](https://travis-ci.org/thiesen/zauberflote.png?branch=master)](https://travis-ci.org/thiesen/zauberflote)
-
+[![Coverage Status](https://coveralls.io/repos/thiesen/zauberflote/badge.png?branch=master)](https://coveralls.io/r/thiesen/zauberflote?branch=master)
 
 # Zauberflote
 
