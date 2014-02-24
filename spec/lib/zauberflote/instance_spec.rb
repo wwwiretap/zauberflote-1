@@ -1,48 +1,63 @@
 require_relative '../../spec_helper'
 
 describe Zauberflote::Instance  do
+  let(:site) { "https://www.mysite.highrisehq.com" }
+  let(:api_token) { "my_api_token" }
 
-  describe "configure_highrise" do
-    before do
-      @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
-      @instance.configure_highrise
+  before { @instance = Zauberflote::Instance.new(site, api_token) }
+  describe "attributes" do
+    it "must have the url attribute" do
+      expect(@instance).to respond_to :url
     end
-    it 'should have the same url' do
-      Highrise::Base.site.to_s.must_equal @instance.url
-    end
-    it 'should have the same api_token' do
-      Highrise::Base.user.must_equal @instance.api_token
-    end
-    it 'should have the xml format' do
-      Highrise::Base.format.to_s.must_equal "ActiveResource::Formats::XmlFormat"
+
+    it "must have the api_token attribute" do
+      expect(@instance).to respond_to :api_token
     end
   end
-  describe "create_person" do
-    before do
-      @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
-      @person = @instance.create_person({name: "Test"})
+  describe "#initialize" do
+    
+    it "must raise exception without arguments" do
+      expect(lambda { instance = Zauberflote::Instance.new }).to raise_error ArgumentError
     end
-    it 'should be instance of Zauberflote::Person' do
-      @person.must_be_instance_of Zauberflote::Person
+    it "must raise exception with only one argument" do
+      expect(lambda { instance = Zauberflote::Instance.new(site) }).to raise_error ArgumentError
     end
-    it 'should have the instance as attribute' do
-      @person.instance.must_equal @instance
+    it "must instantiate with two arguments" do
+      expect(@instance).to be_a Zauberflote::Instance
+    end
+  end 
+  describe "#configure_highrise" do
+    before { @instance.configure_highrise }
+    it "must have the same url than highrise" do
+      expect(Highrise::Base.site.to_s).to eq @instance.url
+    end
+    it "must have the same api token than highrise" do
+      expect(Highrise::Base.user).to eq @instance.api_token
+    end
+    it "must set the highrise format to xml" do
+      expect(Highrise::Base.format).to be_a ActiveResource::Formats::XmlFormat
     end
   end
 
-  describe 'concurrent instances' do
-    before do
-      @instance_a = Zauberflote::Instance.new("https://instanceA.highrisehq.com", "tokenA")
-      @instance_b = Zauberflote::Instance.new("https://instanceB.highrisehq.com", "tokenB")
+  describe "#create_person" do
+    before { @person = @instance.create_person({}) }
+    it "must create a Zauberflote::Person object" do
+      expect(@person).to be_a Zauberflote::Person
     end
-
-    it 'should have different url attribute values' do
-      @instance_a.url.wont_equal @instance_b.url
+    it "must have the instance as attribute" do
+      expect(@person.instance).to eq @instance
     end
-    it 'should have different api_token attributes' do
-      @instance_a.api_token.wont_equal @instance_b.api_token.wont_equal
+    describe "multiple instances" do
+      before do
+        @instance_a = Zauberflote::Instance.new(site, api_token)
+        @instance_b = Zauberflote::Instance.new("http://site2.highrisehq.com", "another_api_token")
+        @person_a = @instance_a.create_person({})
+        @person_b = @instance_b.create_person({})
+      end
+      it "must have different instance attributes" do
+        expect(@person_a.instance).to_not eq @person_b.instance
+      end 
     end
-
   end
 
 end

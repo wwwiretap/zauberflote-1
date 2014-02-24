@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'highrise'
-gem 'rake', '10.1.1'
-gem 'turn'
-gem 'coveralls'
+group :test do
+  gem 'rspec-rails', '2.13.1'
+end
+gem 'coveralls', require: false
