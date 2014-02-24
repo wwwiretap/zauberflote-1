@@ -1,17 +1,7 @@
 require_relative '../../spec_helper'
 
 describe Zauberflote::Instance  do
-  describe "initialize" do
-    before do
-      instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
-    end
-    it 'should return the instance url' do
-      instance.url.must_equal "https://mysite.highrisehq.com"
-    end
-    it 'should return the instance api token' do
-      instance.api_token.must_equal "my_api_token"
-    end
-  end
+
   describe "configure_highrise" do
     before do
       @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
@@ -30,7 +20,7 @@ describe Zauberflote::Instance  do
   describe "create_person" do
     before do
       @instance = Zauberflote::Instance.new("https://mysite.highrisehq.com", "my_api_token")
-      @person = @instance.create_person
+      @person = @instance.create_person({name: "Test"})
     end
     it 'should be instance of Zauberflote::Person' do
       @person.must_be_instance_of Zauberflote::Person

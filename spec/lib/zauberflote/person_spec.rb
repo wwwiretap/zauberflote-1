@@ -31,18 +31,4 @@ describe Zauberflote::Person do
     end
   end
 
-  describe 'saving people in concurrent instances' do
-    before do
-      instance_a = Zauberflote::Instance.new('https://self1369.highrisehq.com/', '5bfa2ad349f174764a333b5eea8730cb')
-      instance_b = Zauberflote::Instance.new('https://nathanthiesen.highrisehq.com/', '9f3e6a2786c7affce261b75c2f256463')
-      person_a = instance_a.create_person({:name => "InstanceA"})
-      person_b = instance_b.create_person({:name => "InstanceB"})
-    end
-
-    it 'should return an id' do
-      lambda { person_a.highrise_save}.wont_nil
-    end
-
-  end
-
 end
