@@ -1,3 +1,7 @@
+[![Code Climate](https://codeclimate.com/github/thiesen/zauberflote.png)](https://codeclimate.com/github/thiesen/zauberflote)
+[![Build Status](https://travis-ci.org/thiesen/zauberflote.png?branch=master)](https://travis-ci.org/thiesen/zauberflote)
+
+
 # Zauberflote
 
 This gem let your application save contacts in Highrise
